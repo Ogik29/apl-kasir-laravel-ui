@@ -57,6 +57,10 @@
                                 <td>{{ number_format($transaction->pay_total - $transaction->total)}}</td>
                             </tr>
                             <tr>
+                                <td>Metode</td>
+                                <td>{{ $transaction->metode }}</td>
+                            </tr>
+                            <tr>
                                 <td><a href="/transaction-history" class="btn btn-danger btn-sm">Back</a></td>
                             </tr>
                         </tbody>

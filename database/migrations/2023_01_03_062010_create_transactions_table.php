@@ -22,6 +22,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->integer('total');
             $table->integer('pay_total');
+            $table->string('metode')->nullable();
 
             $table->timestamps();
         });

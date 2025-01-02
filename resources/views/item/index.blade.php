@@ -32,6 +32,7 @@
                                 <th scope="col">Category</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Stock</th>
+                                <th scope="col">Metode</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -43,6 +44,7 @@
                                     <td>{{ $item->category->name }}</td>
                                     <td>{{ number_format($item->price) }}</td>
                                     <td>{{ number_format($item->stock) }}</td>
+                                    <td>{{ $item->metode }}</td>
                                     <td>
                                         <form action="/item/{{ $item->id}}" method="POST">
                                             @csrf

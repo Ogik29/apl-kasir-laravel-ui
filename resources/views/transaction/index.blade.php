@@ -24,10 +24,10 @@
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th class="col-3">Category</th>
-                                <th class="col-3">Item</th>                            
-                                <th>Stock</th>                            
-                                <th class="col-2">Price</th>                            
+                                <th class="col-2">Category</th>
+                                <th class="col-2">Item</th>                            
+                                <th class="col-2">Stock</th>                            
+                                <th class="col-2">Price</th>                          
                                 <th>Action</th>                            
                             </tr>
                         </thead>
@@ -147,6 +147,19 @@
                                     <td> <b> : </b> </td>
                                     <td>
                                         <input type="text" name="" class="form-control" readonly id="return">
+                                    </td>
+                                </tr>
+
+                                <tr class="table">
+                                    <td> <b> Metode  </b> </td>
+                                    <td> <b> : </b> </td>
+                                    <td>
+                                        {{-- <label for="exampleSelect" class="form-label">Choose Metode</label> --}}
+                                        <select class="form-select" id="exampleSelect" name="metode">
+                                            <option value="">Choose</option>
+                                            <option value="QRIS">QRIS</option>
+                                            <option value="CASH">CASH</option>
+                                        </select>
                                     </td>
                                 </tr>
 

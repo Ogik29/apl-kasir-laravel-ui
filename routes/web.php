@@ -20,7 +20,7 @@ use App\Models\Transaction;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -32,4 +32,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/transaction', TransactionController::class);
     Route::get('/transaction-history', [TransactionController::class, 'history_transaction']);
     Route::post('/transaction_detail', [TransactionController::class, 'checkout']);
+    Route::delete('/deleteTransaction/{id}', [TransactionController::class, 'destroy2']);
 });

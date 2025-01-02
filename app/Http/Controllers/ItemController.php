@@ -45,7 +45,7 @@ class ItemController extends Controller
             'name' => 'required',
             'price' => 'required',
             'stock' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
         ]);
 
         // $validateData['category_id'] = $request->category_id;

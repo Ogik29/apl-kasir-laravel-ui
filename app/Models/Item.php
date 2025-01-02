@@ -13,7 +13,7 @@ class Item extends Model
         'category_id',
         'name',
         'price',
-        'stock'
+        'stock',
     ];
 
     public function category()

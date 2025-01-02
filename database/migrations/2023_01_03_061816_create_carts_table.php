@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('item_id')->references('id')->on('items')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->integer('quantity');
+            $table->string('metode')->nullable();
             $table->timestamps();
         });
     }

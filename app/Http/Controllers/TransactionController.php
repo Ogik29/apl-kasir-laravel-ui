@@ -107,32 +107,80 @@ class TransactionController extends Controller
         return back();
     }
 
+    public function destroy2($id)
+    {
+        Transaction::destroy($id);
+        return back();
+    }
+
     public function history_transaction()
     {
+        $transactionQris = Transaction::where('metode', 'QRIS')->sum('total');
+        $transactionCash = Transaction::where('metode', 'CASH')->sum('total');
+
         return view('transaction.history', [
-            'transactions' => Transaction::latest()->get()
+            'transactions' => Transaction::latest()->get(),
+            'qris' => $transactionQris,
+            'cash' => $transactionCash
         ]);
     }
 
     public function checkout(Request $request)
     {
+        // $validateData = $request->validate([
+        //     'total' => 'required',
+        //     'pay_total' => 'required'
+        // ]);
+
+        // $validateData['user_id'] = auth()->user()->id;
+        // $validateData['date'] = now();
+
+        // $transaction = Transaction::create($validateData);
+
+        // foreach (Cart::all() as $cart) {
+        //     TransactionDetail::create([
+        //         'transaction_id' => $transaction->id,
+        //         'item_id' => $cart->item_id,
+        //         'quantity' => $cart->quantity
+        //     ]);
+        //     Item::find($cart->item_id)->stock -= $cart->quantity;
+        // }
+        // Cart::truncate();
+
+        // return redirect('/transaction/' . $transaction->id);
+
         $validateData = $request->validate([
             'total' => 'required',
-            'pay_total' => 'required'
+            'pay_total' => 'required',
+            'metode' => 'required'
         ]);
 
         $validateData['user_id'] = auth()->user()->id;
         $validateData['date'] = now();
+        // $validateData['metode'] = $request->metode;
 
+        // Simpan transaksi
         $transaction = Transaction::create($validateData);
 
+        // Loop untuk setiap item di dalam keranjang
         foreach (Cart::all() as $cart) {
+            // Simpan detail transaksi
             TransactionDetail::create([
                 'transaction_id' => $transaction->id,
                 'item_id' => $cart->item_id,
-                'quantity' => $cart->quantity
+                'quantity' => $cart->quantity,
+                'metode' => $cart->metode,
             ]);
+
+            // Update stok item
+            $item = Item::find($cart->item_id);
+            if ($item) {
+                $item->stock -= $cart->quantity; // Kurangi stok
+                $item->save(); // Simpan perubahan ke database
+            }
         }
+
+        // Kosongkan keranjang
         Cart::truncate();
 
         return redirect('/transaction/' . $transaction->id);

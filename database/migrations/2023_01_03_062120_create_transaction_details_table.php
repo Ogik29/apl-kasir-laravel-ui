@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreign('item_id')->references('id')->on('items')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->Integer('quantity');
+            $table->String('metode')->nullable();
             // $table->integer('subtotal');
             $table->timestamps();
         });
